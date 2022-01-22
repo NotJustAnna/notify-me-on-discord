@@ -30,12 +30,12 @@ func qbittorrent(ctx *gin.Context) {
 	size.SetString(information[1], 10)
 
 	postBody, _ := json.Marshal(map[string]interface{}{
-		"content": fmt.Sprintf("%s Notification from homestack!", os.Getenv("USER_TO_MENTION")),
+		"content": fmt.Sprintf("%s A torrent finished downloading!", os.Getenv("USER_TO_MENTION")),
 		"embeds": []map[string]interface{}{
 			{
+				"title": information[0],
 				"description": fmt.Sprintf(
-					"**%s**\nTorrent size: %s\n\n%s\n%s\n%s",
-					information[0],
+					"Size: **%s**\n\n%s\n%s\n%s",
 					humanize.BigIBytes(size),
 					fmt.Sprintf("· Go to [qBittorrent](%s)", os.Getenv("URL_QBITTORRENT")),
 					fmt.Sprintf("· Go to [FileBrowser](%s)", os.Getenv("URL_FILEBROWSER")),
